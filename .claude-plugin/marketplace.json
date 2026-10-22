@@ -2,7 +2,8 @@
   "name": "hstack",
   "description": "Hyunsol Park's software lifecycle skills.",
   "owner": {
-    "name": "Hyunsol Park"
+    "name": "Hyunsol Park",
+    "url": "https://github.com/hpark0011/hstack"
   },
   "version": "0.1.0",
   "plugins": [

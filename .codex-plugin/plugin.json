@@ -5,6 +5,8 @@
   "author": {
     "name": "Hyunsol Park"
   },
+  "homepage": "https://github.com/hpark0011/hstack",
+  "repository": "https://github.com/hpark0011/hstack",
   "license": "MIT",
   "keywords": [
     "hstack",
@@ -19,7 +21,8 @@
     "displayName": "HStack",
     "shortDescription": "Chain spec, tickets, review, and the pull request so you don't carry work between stages.",
     "longDescription": "HStack is a personal skill package for the software lifecycle. /hstack looks at where the work is and runs /plan or /ship. /setup-hstack writes .hstack/config.yaml so the steps stay repo-agnostic.",
-    "developerName": "Hyunsol Park",
+        "developerName": "Hyunsol Park",
+        "websiteURL": "https://github.com/hpark0011/hstack",
     "category": "Developer Tools",
     "capabilities": [
       "Interactive",

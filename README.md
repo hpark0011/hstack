@@ -32,22 +32,22 @@ In a Claude Code plugin install, commands are prefixed: `/hstack:ship`, `/hstack
 
 ## Install
 
-The `skills` CLI ([vercel-labs/skills](https://github.com/vercel-labs/skills)) discovers `skills/*/SKILL.md` at the root of this repo.
+The `skills` CLI ([vercel-labs/skills](https://github.com/vercel-labs/skills)) discovers `skills/*/SKILL.md` at the root of this repo. The public package is [hpark0011/hstack](https://github.com/hpark0011/hstack).
 
-From a checkout, in the consumer repo:
-
-```bash
-npx skills add /path/to/hstack --skill '*' -a claude-code -a codex -a cursor -y
-```
-
-From GitHub, once this repo has a remote, replace `<owner>/hstack` with that `owner/repo`:
+From the consumer repo:
 
 ```bash
 # Project install. Commit the result if the team should share it.
-npx skills add <owner>/hstack --skill '*' -a claude-code -a codex -a cursor -y
+npx skills add hpark0011/hstack --skill '*' -a claude-code -a codex -a cursor -y
 
 # Global install, available in every repo.
-npx skills add <owner>/hstack --skill '*' -g -a claude-code -a codex -a cursor -y
+npx skills add hpark0011/hstack --skill '*' -g -a claude-code -a codex -a cursor -y
+```
+
+From a local checkout of this package, while developing it:
+
+```bash
+npx skills add /path/to/hstack --skill '*' -a claude-code -a codex -a cursor -y
 ```
 
 Project paths the CLI writes:
@@ -65,11 +65,11 @@ Cursor and Codex share the project directory `.agents/skills`. One project insta
 This repo is a one-plugin marketplace. The plugin root and the marketplace root are the same directory.
 
 ```text
-/plugin marketplace add <owner>/hstack
+/plugin marketplace add hpark0011/hstack
 /plugin install hstack@hstack
 ```
 
-From a local checkout, `claude plugin marketplace add /path/to/hstack` then `/plugin install hstack@hstack`.
+From a local checkout while developing: `claude plugin marketplace add /path/to/hstack`, then `/plugin install hstack@hstack`.
 
 ### Cursor plugin
 
@@ -80,7 +80,7 @@ From a local checkout, `claude plugin marketplace add /path/to/hstack` then `/pl
 `.codex-plugin/plugin.json` is the plugin manifest. `.agents/plugins/marketplace.json` is the marketplace entry, with the plugin path `./`.
 
 ```bash
-codex plugin marketplace add <owner>/hstack
+codex plugin marketplace add hpark0011/hstack
 ```
 
 The plugin has no external account. The marketplace policy field is the catalog shape Codex expects.
@@ -90,7 +90,7 @@ The plugin has no external account. The marketplace policy field is the catalog 
 `skills add` accepts a full 40-character commit SHA as a URL fragment:
 
 ```bash
-npx skills add https://github.com/<owner>/hstack#<40-character-sha> --skill '*' -y
+npx skills add https://github.com/hpark0011/hstack#<40-character-sha> --skill '*' -y
 ```
 
 A branch or tag uses the same fragment (`#main`, `#v0.1.0`). The project lockfile `skills-lock.json` records the source. Plugin installs follow that host's own ref pin (`--ref` on `codex plugin marketplace add`, or a marketplace source `sha` in Claude Code).
