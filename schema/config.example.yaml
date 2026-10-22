@@ -1,0 +1,64 @@
+# HStack config. /setup-hstack writes this file into the consumer repo. Commit it.
+# Values below are an illustration. null means unset. [] means none.
+# Step skills read these keys. They do not hardcode paths of their own.
+
+version: 1
+
+# Branch that implement and ship refuse to edit, and that ship rebases onto.
+default_branch: 'main'
+
+paths:
+  # Directory for spec markdown. null if this repo has no spec home.
+  specs: 'docs/specs'
+  # Broader docs directory. null if none.
+  docs: 'docs'
+  # ADR directory. null if none.
+  adrs: 'docs/adr'
+
+verify:
+  # Commands run in order from the repo root. Empty means verify stops.
+  commands:
+    - 'npm test'
+
+tickets:
+  # github, linear, files, or command.
+  system: 'github'
+  # The id is capture group 1 when the regex has one, otherwise the whole match.
+  id_patterns:
+    - '#(\d+)'
+    - '\bGH-(\d+)\b'
+    - '\bissue-(\d+)\b'
+  # Markdown ticket directory when system is files. Otherwise null.
+  files_dir: null
+  # True only when those files are an activity thread that should receive comments.
+  files_are_threads: false
+  create:
+    # Stdin is the title line, a blank line, then the body. The command prints the new id.
+    # null uses the built-in adapter for tickets.system.
+    command: null
+  comment:
+    # {id} is replaced. The body is stdin. null if unused.
+    command: 'gh issue comment {id} --body-file -'
+    # Only "linear" is defined. null if unused.
+    tool: null
+    # Used only when command and tool are both null.
+    instructions: null
+
+pr:
+  # Shell command that opens the pull request. When set, pr does not also run gh pr create.
+  script: null
+  # Instructions file for opening the pull request. When set, pr follows it and does not run gh pr create.
+  prompt: null
+  # Body template. null means match recent merged pull requests.
+  template: '.github/PULL_REQUEST_TEMPLATE.md'
+
+rebase:
+  # File to follow while resolving rebase conflicts. null if none.
+  conflict_prompt: null
+
+# Extra instruction files, repo-relative. Editing and review skills read them.
+rules: []
+
+ship:
+  # Environment variable names ship must not set.
+  forbidden_env: []

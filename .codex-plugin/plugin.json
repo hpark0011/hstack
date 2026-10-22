@@ -1,0 +1,34 @@
+{
+  "name": "hstack",
+  "version": "0.1.0",
+  "description": "Hyunsol Park's software lifecycle: one entry skill, plan and ship workflows, and the steps they chain.",
+  "author": {
+    "name": "Hyunsol Park"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hstack",
+    "sdlc",
+    "ship",
+    "plan",
+    "workflow",
+    "codex"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "HStack",
+    "shortDescription": "Chain spec, tickets, review, and the pull request so you don't carry work between stages.",
+    "longDescription": "HStack is a personal skill package for the software lifecycle. /hstack looks at where the work is and runs /plan or /ship. /setup-hstack writes .hstack/config.yaml so the steps stay repo-agnostic.",
+    "developerName": "Hyunsol Park",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use /hstack to take this as far as the lifecycle can.",
+      "Use /setup-hstack and write .hstack/config.yaml for this repo."
+    ]
+  }
+}

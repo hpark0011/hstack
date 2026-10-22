@@ -1,0 +1,11 @@
+{
+  "name": "hstack",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Hyunsol Park's software lifecycle skills.",
+  "license": "MIT",
+  "scripts": {
+    "validate": "node scripts/validate-skills.mjs",
+    "detect": "node skills/setup-hstack/scripts/detect.mjs"
+  }
+}

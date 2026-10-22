@@ -1,0 +1,25 @@
+{
+  "name": "hstack",
+  "displayName": "HStack",
+  "version": "0.1.0",
+  "description": "Hyunsol Park's software lifecycle: one entry skill, plan and ship workflows, and the steps they chain.",
+  "author": {
+    "name": "Hyunsol Park"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hstack",
+    "sdlc",
+    "ship",
+    "plan",
+    "workflow"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "workflow",
+    "planning",
+    "review",
+    "shipping"
+  ],
+  "skills": "./skills/"
+}

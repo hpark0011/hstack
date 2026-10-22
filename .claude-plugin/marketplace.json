@@ -1,0 +1,16 @@
+{
+  "name": "hstack",
+  "description": "Hyunsol Park's software lifecycle skills.",
+  "owner": {
+    "name": "Hyunsol Park"
+  },
+  "version": "0.1.0",
+  "plugins": [
+    {
+      "name": "hstack",
+      "source": ".",
+      "description": "Entry skill, plan and ship workflows, and the SDLC steps they chain.",
+      "category": "workflow"
+    }
+  ]
+}
