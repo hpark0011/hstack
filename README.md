@@ -1,6 +1,6 @@
 # HStack
 
-HStack is Hyunsol Park's software lifecycle, in [Agent Skills](https://agentskills.io) format. One entry skill looks at where the work is and runs the workflow for that stage. The workflows call step skills. The step skills read `.hstack/config.yaml` from the repo they are working in, so the same package runs in any project.
+HStack is Hyunsol Park's software lifecycle, in [Agent Skills](https://agentskills.io) format. One entry skill looks at where the work is and runs the workflow for that stage. The workflows call step skills. Skills that take paths or commands from the repo read `.hstack/config.yaml` in that repo, so the same package runs in any project.
 
 `/ship` is a repo-agnostic port of an earlier Doma skill. Paths, ticket commands, and pull-request instructions come from the config. `/simplify` is derived from Brian Lovin's simplify skill; see [NOTICE.md](NOTICE.md).
 
@@ -14,8 +14,8 @@ HStack is Hyunsol Park's software lifecycle, in [Agent Skills](https://agentskil
 | `/spec` | You want the spec only. |
 | `/tickets` | A spec exists and you want tracker tickets only. |
 | `/implement` | A ticket exists and the code does not. Stops before review and the pull request. |
-| `/review` | Read-only review: assumptions, couplings, scattered responsibilities, mixed responsibilities. |
-| `/resolve` | Fix supported findings from a review. Does not publish. |
+| `/review` | Read-only review of this worktree or PR for hidden couplings, implicit assumptions, mixed responsibilities, and scattered responsibilities. |
+| `/resolve` | Fix what that review found, keep each fix scoped to its finding, and verify. Does not commit, push, or merge unless asked. |
 | `/scope` | Decide whether the diff is one change or a coupling problem. A file count alone is not a failure. |
 | `/simplify` | Make the touched code plainer without changing behavior. |
 | `/verify` | Run the commands in the config and record a verdict. |
@@ -97,7 +97,7 @@ A branch or tag uses the same fragment (`#main`, `#v0.1.0`). The project lockfil
 
 ## Setup and config
 
-In the consumer repo, run `/setup-hstack` once. It runs `skills/setup-hstack/scripts/detect.mjs`, asks about anything it could not see, and writes `.hstack/config.yaml`. Commit that file. Step skills stop and tell you to run setup when it is missing.
+In the consumer repo, run `/setup-hstack` once. It runs `skills/setup-hstack/scripts/detect.mjs`, asks about anything it could not see, and writes `.hstack/config.yaml`. Commit that file. A skill that reads the config stops and tells you to run `/setup-hstack` when the file is missing.
 
 The annotated key list is [schema/config.example.yaml](schema/config.example.yaml).
 
@@ -118,7 +118,7 @@ The annotated key list is [schema/config.example.yaml](schema/config.example.yam
 | `pr.prompt` | Instructions file. Same rule: it owns publication. |
 | `pr.template` | Body template. Null means match recent merged pull requests. |
 | `rebase.conflict_prompt` | File to follow while resolving rebase conflicts. |
-| `rules` | Extra instruction files. Review, resolve, implement, and simplify read them. |
+| `rules` | Extra instruction files. Implement and simplify read them. |
 | `ship.forbidden_env` | Variable names `/ship` must not set. |
 
 Built-in adapters when the matching command is null:

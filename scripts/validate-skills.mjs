@@ -13,6 +13,9 @@ const skillsDir = path.join(root, "skills");
 
 const USER_ONLY = new Set(["hstack", "plan", "ship"]);
 const PIPELINE = ["review", "resolve", "scope", "simplify", "verify", "pr", "ticket-comment"];
+// /review and /resolve stay short. /ship and /scope read the config before
+// they call those skills, so the short skills do not repeat that step.
+const SKIPS_CONFIG_READ = new Set(["review", "resolve"]);
 
 const DENY_IN_SKILLS = [
   "doma",
@@ -70,8 +73,10 @@ export function checkSkillText(folder, text) {
     errors.push(`${folder}: leave it model-invocable so a matching request can select it`);
   }
 
-  if (!body.includes(".hstack/config.yaml")) errors.push(`${folder}: must tell the agent to read .hstack/config.yaml`);
-  if (!body.includes("setup-hstack")) errors.push(`${folder}: must send a missing config to setup-hstack`);
+  if (!SKIPS_CONFIG_READ.has(folder)) {
+    if (!body.includes(".hstack/config.yaml")) errors.push(`${folder}: must tell the agent to read .hstack/config.yaml`);
+    if (!body.includes("setup-hstack")) errors.push(`${folder}: must send a missing config to setup-hstack`);
+  }
 
   const denied = denyHits(body + "\n" + description, DENY_IN_SKILLS);
   if (denied.length) errors.push(`${folder}: hardcoded repo token: ${denied.join(", ")}`);
@@ -106,8 +111,6 @@ const SPEAKS = new Set([
   "spec",
   "tickets",
   "implement",
-  "review",
-  "resolve",
   "scope",
   "simplify",
   "verify",
@@ -285,6 +288,26 @@ function selfTest() {
   const goodShip = fs.readFileSync(path.join(skillsDir, "ship", "SKILL.md"), "utf8");
   const shipErrors = checkSkillText("ship", goodShip).filter((error) => error.startsWith("ship:"));
   if (shipErrors.length) throw new Error(shipErrors.join("\n"));
+  const shortReview = [
+    "---",
+    "name: review",
+    "description: >",
+    "  Read-only review of the coding work in this worktree or pull request for hidden couplings, implicit assumptions, mixed responsibilities, and scattered responsibilities. Differs from /resolve, which fixes those findings.",
+    "---",
+    "",
+    "# Review",
+    "",
+    "Review the diff. Do not edit.",
+    "",
+  ].join("\n");
+  const reviewErrors = checkSkillText("review", shortReview);
+  if (reviewErrors.some((error) => error.includes("config.yaml") || error.includes("setup-hstack") || error.includes("do not speak"))) {
+    throw new Error(`self-test required process text inside review: ${reviewErrors.join("; ")}`);
+  }
+  const scopeErrors = checkSkillText("scope", shortReview.replace("name: review", "name: scope"));
+  if (!scopeErrors.some((error) => error.includes("config.yaml"))) {
+    throw new Error("self-test let scope skip .hstack/config.yaml");
+  }
   console.log("validator self-test passed");
 }
 

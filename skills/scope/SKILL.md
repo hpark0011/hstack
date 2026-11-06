@@ -17,7 +17,7 @@ Compare the full diff with the requirement: the user request, the spec, or the t
 
 Count the files and the directories they span. A file count by itself is not a failure.
 
-Use the four lenses in the review record. [review](../review/SKILL.md) defines them. If that record does not cover them, read and follow review once, read-only, before judging. Do not run resolve.
+Use the review of this diff. If you do not have one, read and follow [review](../review/SKILL.md) once, read-only, before judging. Do not run resolve.
 
 - Every file is required by the requirement, or by one ownership move: keep a one-paragraph justification for the caller.
 - One responsibility is smeared across owners: fix that modularization in this change, count again, and follow [verify](../verify/SKILL.md) for the repair.

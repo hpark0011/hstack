@@ -26,8 +26,8 @@ If `.hstack/config.yaml` is missing and the skill you would name needs it, say t
 | Turn a spec into tickets | [tickets](../tickets/SKILL.md) | It does not write code. |
 | Build a ticket that already exists | [implement](../implement/SKILL.md) | It stops before review and the pull request. |
 | Publish a branch that already has the code | [ship](../ship/SKILL.md) | It runs the publish chain and speaks once at the end. |
-| Review without editing | [review](../review/SKILL.md) | It records assumptions, couplings, and mixed responsibilities. |
-| Fix a review's findings | [resolve](../resolve/SKILL.md) | It repairs a record and does not publish. |
+| Review without editing | [review](../review/SKILL.md) | It checks the worktree or PR for hidden couplings, implicit assumptions, mixed responsibilities, and scattered responsibilities, and it does not edit. |
+| Fix a review's findings | [resolve](../resolve/SKILL.md) | It fixes those findings, keeps each fix scoped, verifies, and does not commit, push, or merge unless asked. |
 | Ask whether the diff should be one change | [scope](../scope/SKILL.md) | A large file count is not itself a failure. |
 | Clean the diff without changing behavior | [simplify](../simplify/SKILL.md) | It does not decide scope and does not fix review findings. |
 | Run the project's checks | [verify](../verify/SKILL.md) | It runs only the commands in the config. |
@@ -39,6 +39,6 @@ If `.hstack/config.yaml` is missing and the skill you would name needs it, say t
 Close calls:
 
 - `/hstack` when you do not know the stage. `/plan` when you know there is no spec or no tickets. `/ship` when the code is already on a feature branch.
-- `/review` lists findings. `/resolve` fixes the supported ones. `/scope` decides whether the diff is one ship. `/simplify` only makes the touched code plainer.
+- `/review` checks the work and does not edit. `/resolve` fixes what that review found and does not commit, push, or merge unless asked. `/scope` decides whether the diff is one ship. `/simplify` only makes the touched code plainer.
 - `/pr` opens the request. `/ship` does the gates, the rebase, the request, and the ticket comment.
 - `/tickets` creates tickets. `/ticket-comment` posts on one that already exists.
