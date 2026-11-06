@@ -36,7 +36,7 @@ Stop and ask, then do not continue, only when:
 
 - the requirement needs a product decision you cannot settle from the request, the task, or the code
 - verification fails and the repair is outside this change
-- resolve leaves a supported finding open, or review coverage is incomplete
+- resolve leaves a review finding unfixed
 - a git step would discard work, rewrite `default_branch`, or force-push any branch other than this feature branch after the rebase below
 - the checkout is `default_branch`
 - the scope check says the change should be split

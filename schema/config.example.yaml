@@ -1,6 +1,6 @@
 # HStack config. /setup-hstack writes this file into the consumer repo. Commit it.
 # Values below are an illustration. null means unset. [] means none.
-# Step skills read these keys. They do not hardcode paths of their own.
+# Skills that need repo paths read these keys. They do not hardcode paths of their own.
 
 version: 1
 
@@ -56,7 +56,7 @@ rebase:
   # File to follow while resolving rebase conflicts. null if none.
   conflict_prompt: null
 
-# Extra instruction files, repo-relative. Editing and review skills read them.
+# Extra instruction files, repo-relative. Implement and simplify read them.
 rules: []
 
 ship:
